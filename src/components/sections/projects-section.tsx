@@ -10,9 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ExternalLink, Code, GanttChart, Layers } from "lucide-react";
+import { ExternalLink, Code, Layers } from "lucide-react";
 import { Badge } from "../ui/badge";
 import snaplockImage from "../../../public/snapslock.png";
+import pomoClockImage from "../../../public/pomoclock.png";
 import { GitHubIcon } from "../ui/icons";
 import Link from "next/link";
 
@@ -22,40 +23,22 @@ const PROJECTS = [
     description:
       "A modern platform for sharing high-quality AI-generated wallpapers. Features user collections, robust search, and seamless downloads.",
     image: snaplockImage,
-    tech: ["Next.js", "TypeScript", "Tailwind", "Supabase", "Shadcn"],
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Shadcn UI"],
     github: "https://github.com/trungtruongpham/snaplock",
-    demo: "https://snapslock.com",
+    demo: "https://www.snapslock.com",
     icon: <Layers className="h-5 w-5" />,
     highlight: "Modern, responsive design with exceptional user experience",
   },
-  // Placeholder for additional projects
   {
-    title: "Portfolio Website",
+    title: "PomoClock",
     description:
-      "The website you're viewing right now. Built with modern web technologies for lightning-fast performance and responsive design across all devices.",
-    image: snaplockImage, // Using same image as placeholder
-    tech: [
-      "Next.js 14",
-      "TypeScript",
-      "Tailwind CSS",
-      "Shadcn UI",
-      "Framer Motion",
-    ],
-    github: "https://github.com/trungtruongpham/portfolio",
-    demo: "#",
+      "A Pomodoro timer app that helps you stay focused and productive.",
+    image: pomoClockImage, // Using same image as placeholder
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI", "Supabase"],
+    github: "https://github.com/trungtruongpham/pomo-clock",
+    demo: "https://pomoclock.com",
     icon: <Code className="h-5 w-5" />,
     highlight: "Optimized for performance with a perfect Lighthouse score",
-  },
-  {
-    title: "Project Management App",
-    description:
-      "A comprehensive project management solution enabling teams to track tasks, manage deadlines, and collaborate effectively in real-time.",
-    image: snaplockImage, // Using same image as placeholder
-    tech: [".NET Core", "React", "Entity Framework", "SQL Server", "Azure"],
-    github: "https://github.com/trungtruongpham/project-management",
-    demo: "#",
-    icon: <GanttChart className="h-5 w-5" />,
-    highlight: "Enterprise-level security with intuitive interface",
   },
 ];
 
@@ -114,7 +97,7 @@ export function ProjectsSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8"
           >
             {PROJECTS.map((project, index) => (
               <motion.div
@@ -122,45 +105,47 @@ export function ProjectsSection() {
                 variants={itemVariants}
                 className="h-full"
               >
-                <Card className="flex flex-col h-full overflow-hidden group bg-background/60 backdrop-blur-sm hover:shadow-md transition-all duration-300">
-                  <CardHeader className="pb-4">
+                <Card className="flex flex-col h-full overflow-hidden group bg-background/60 backdrop-blur-sm hover:shadow-md transition-all duration-300 border border-border/40">
+                  <CardHeader className="pb-2 md:pb-4 pt-3 md:pt-6 px-4 sm:px-5 md:px-6">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-full bg-primary/10 text-primary">
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <div className="p-1.5 md:p-2 rounded-full bg-primary/10 text-primary">
                           {project.icon}
                         </div>
-                        <CardTitle>{project.title}</CardTitle>
+                        <CardTitle className="text-base md:text-lg lg:text-xl">
+                          {project.title}
+                        </CardTitle>
                       </div>
                     </div>
                   </CardHeader>
 
-                  <CardContent className="flex-grow space-y-4">
-                    <div className="relative aspect-video mb-4 overflow-hidden rounded-lg">
+                  <CardContent className="flex-grow space-y-3 md:space-y-4 px-4 sm:px-5 md:px-6 py-0 md:py-2">
+                    <div className="relative aspect-video mb-2 md:mb-4 overflow-hidden rounded-lg">
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         className="object-cover rounded-lg transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        sizes="(max-width: 640px) 95vw, (max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
                         priority={index === 0}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <div className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
+                      <div className="inline-block px-2 py-0.5 md:px-3 md:py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
                         {project.highlight}
                       </div>
-                      <p className="text-muted-foreground">
+                      <p className="text-muted-foreground text-sm md:text-base">
                         {project.description}
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 md:gap-2">
                       {project.tech.map((tech) => (
                         <Badge
                           key={tech}
                           variant="secondary"
-                          className="font-medium"
+                          className="font-medium text-xs md:text-sm"
                         >
                           {tech}
                         </Badge>
@@ -168,12 +153,11 @@ export function ProjectsSection() {
                     </div>
                   </CardContent>
 
-                  <CardFooter className="flex gap-4 mt-auto pt-4 border-t border-border/40">
+                  <CardFooter className="flex flex-col gap-3 mt-auto pt-4 border-t border-border/40 px-4 sm:px-5 md:px-6 pb-4 md:pb-6">
                     <Button
                       variant="outline"
-                      size="sm"
                       asChild
-                      className="flex-1"
+                      className="w-full h-10 text-sm font-medium"
                     >
                       <a
                         href={project.github}
@@ -185,7 +169,7 @@ export function ProjectsSection() {
                         View Code
                       </a>
                     </Button>
-                    <Button size="sm" asChild className="flex-1">
+                    <Button asChild className="w-full h-10 text-sm font-medium">
                       <a
                         href={project.demo}
                         target="_blank"

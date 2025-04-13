@@ -81,7 +81,7 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center pt-2"
           >
             <Button size="lg" asChild>
-              <Link href="#projects">View My Work</Link>
+              <Link href="#projects">View My Works</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="#contact">Let&apos;s Work Together</Link>
